@@ -25,7 +25,8 @@ export type TSupportedSites =
   | "Yandex Music"
   | "YouTube"
   | "YouTube Embeds"
-  | "YouTube Music";
+  | "YouTube Music"
+  | "Zvuk";
 
 export const SupportedSites: TSupportedSites[] = [
   "Apple Music",
@@ -48,6 +49,7 @@ export const SupportedSites: TSupportedSites[] = [
   "YouTube",
   "YouTube Embeds",
   "YouTube Music",
+  "Zvuk",
 ];
 
 type TSiteSettings = Partial<{
