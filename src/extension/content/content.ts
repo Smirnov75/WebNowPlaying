@@ -112,6 +112,11 @@ const siteIndex: SiteIndex[] = [
     name: "YouTube Music",
     exec,
   },
+  {
+    match: () => window.location.hostname === "zvuk.com",
+    name: "Zvuk",
+    exec,
+  },
 ];
 
 const GenericSite: SiteIndex = {
