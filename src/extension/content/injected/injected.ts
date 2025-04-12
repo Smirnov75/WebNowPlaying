@@ -21,6 +21,7 @@ import YandexMusic from "./sites/YandexMusic";
 import YouTube from "./sites/YouTube";
 import YouTubeEmbeds from "./sites/YouTubeEmbeds";
 import YouTubeMusic from "./sites/YouTubeMusic";
+import Zvuk from "./sites/Zvuk";
 import { InjectedUtils } from "./utils";
 
 let reqCount = 0;
@@ -49,6 +50,7 @@ const sites = [
   YouTube,
   YouTubeEmbeds,
   YouTubeMusic,
+  Zvuk,
 ];
 (window as any)._wnp = {};
 sites.forEach((site) => {
