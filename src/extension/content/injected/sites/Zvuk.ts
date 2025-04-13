@@ -61,28 +61,36 @@ const Zvuk: Site = {
       return Repeat.NONE;
     },
   }),
-events: {
-  setState: (state) => {
-    const button = document.querySelector('[class^="styles_controls"]')?.children[1] as HTMLButtonElement;
-    if (!button) throw new Event("Failed to find button");
-    const currentState = Zvuk.info.state();
-    setStatePlayPauseButton(button, currentState, state);
-  },
-  skipPrevious: () => {
-    const button = document.querySelector('[class^="styles_controls"]')?.children[0] as HTMLButtonElement;
-    if (!button) throw new EventError();
-    button.click();
-  },
-  skipNext: () => {
-    const button = document.querySelector('[class^="styles_controls"]')?.children[2] as HTMLButtonElement;
-    if (!button) throw new EventError();
-    button.click();
-  },
-  setPosition: null,  /* WIP */
-  setVolume: null,
-  setRating: null,    /* WIP */
-  setRepeat: null,    /* WIP */
-  setShuffle: null,   /* WIP */
+  events: {
+    setState: (state) => {
+      const button = document.querySelector('[class^="styles_controls"]')?.children[1] as HTMLButtonElement;
+      if (!button) throw new Event("Failed to find button");
+      const currentState = Zvuk.info.state();
+      setStatePlayPauseButton(button, currentState, state);
+    },
+    skipPrevious: () => {
+      const button = document.querySelector('[class^="styles_controls"]')?.children[0] as HTMLButtonElement;
+      if (!button) throw new EventError();
+      button.click();
+    },
+    skipNext: () => {
+      const button = document.querySelector('[class^="styles_controls"]')?.children[2] as HTMLButtonElement;
+      if (!button) throw new EventError();
+      button.click();
+    },
+    setPosition: null,
+    setVolume: null,
+    setRating: null,
+    setShuffle: () => {
+      const button = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[1] as HTMLButtonElement;
+      if (!button) throw new EventError();
+      button.click();
+    },
+    setRepeat: () => {
+      const button = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[2] as HTMLButtonElement;
+      if (!button) throw new EventError();
+      button.click();
+    },
   },
   controls: () => createDefaultControls(Zvuk),
 };
