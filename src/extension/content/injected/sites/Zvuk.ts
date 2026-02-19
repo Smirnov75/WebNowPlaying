@@ -46,18 +46,18 @@ const Zvuk: Site = {
     duration: () => getDurationTime(),
     rating: () => 0,
     volume: () => {
-      const el = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[0].children[0].children[1].getAttribute('aria-valuenow');
+      const el = document.querySelector('[class^="styles_miniPlayerControls"]')?.children[0]?.children[0]?.children[0]?.children[1]?.getAttribute('aria-valuenow');
       if (!el) return 100;
       return parseFloat(el);
     },
     shuffle: () => {
-      const el = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[1].children[0];
-      return /styles_activeIconVisible/.test(el.children[1].className);
+      const el = document.querySelector('[class^="styles_miniPlayerControls"]')?.children[0]?.children[1]?.children[0];
+      return /styles_activeIconVisible/.test(el?.children[1]?.className ?? '');
     },
     repeat: () => {
-      const el = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[2].children[0];
-      if (el.children[0].children[0].querySelectorAll('path').length > 1 ) return Repeat.ONE;
-      if (/styles_activeIconVisible/.test(el.children[1].className)) return Repeat.ALL;
+      const el = document.querySelector('[class^="styles_miniPlayerControls"]')?.children[0]?.children[2]?.children[0];
+      if ((el?.children[0]?.children[0]?.querySelectorAll('path').length ?? 0) > 1) return Repeat.ONE;
+      if (/styles_activeIconVisible/.test(el?.children[1]?.className ?? '')) return Repeat.ALL;
       return Repeat.NONE;
     },
   }),
