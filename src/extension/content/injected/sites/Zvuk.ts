@@ -1,5 +1,5 @@
 import { getMediaSessionCover } from "../../../../utils/misc";
-import { EventError, Repeat, Site, StateMode } from "../../../types";
+import { EventError, RatingSystem, Repeat, Site, StateMode } from "../../../types";
 import { createDefaultControls, createSiteInfo, ratingUtils, setStatePlayPauseButton } from "../utils";
 
 function getElapsedTime() {
@@ -44,7 +44,11 @@ const Zvuk: Site = {
     },
     position: () => getElapsedTime(),
     duration: () => getDurationTime(),
-    rating: () => 0,
+    rating: () => {
+      const el = document.querySelector('[class^="styles_actions"]')?.children[1]?.children[0]?.children[0];
+      if ((el?.childNodes.length ?? 0) == 1) return 5;
+      return 0;
+    },
     volume: () => {
       const el = document.querySelector('[class^="styles_miniPlayerControls"]')?.children[0]?.children[0]?.children[0]?.children[1]?.getAttribute('aria-valuenow');
       if (!el) return 100;
@@ -80,19 +84,27 @@ const Zvuk: Site = {
     },
     setPosition: null,
     setVolume: null,
-    setRating: null,
     setShuffle: () => {
-      const button = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[1] as HTMLButtonElement;
+      const button = document.querySelector('[class^="styles_miniPlayerControls"]')?.children[0]?.children[1] as HTMLButtonElement;
       if (!button) throw new EventError();
       button.click();
     },
     setRepeat: () => {
-      const button = document.querySelectorAll('[class^="styles_controls"]')[1].children[0].children[2] as HTMLButtonElement;
+      const button = document.querySelector('[class^="styles_miniPlayerControls"]')?.children[0]?.children[2] as HTMLButtonElement;
+      if (!button) throw new EventError();
+      button.click();
+    },
+    setRating: () => {
+      const button = document.querySelector('[class^="styles_actions"]')?.children[1] as HTMLButtonElement;
       if (!button) throw new EventError();
       button.click();
     },
   },
-  controls: () => createDefaultControls(Zvuk),
+  controls: () =>
+  createDefaultControls(Zvuk, {
+    ratingSystem: RatingSystem.LIKE,
+    availableRepeat: Repeat.NONE | Repeat.ALL | Repeat.ONE,
+  }),
 };
 
 export default Zvuk;
